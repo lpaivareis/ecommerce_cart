@@ -23,5 +23,6 @@ RSpec.describe Product, type: :model do
 
   context 'when associating' do
     it { is_expected.to have_many(:cart_items).dependent(:destroy) }
+    it { is_expected.to have_many(:carts).through(:cart_items) }
   end
 end
