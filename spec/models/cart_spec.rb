@@ -9,6 +9,10 @@ RSpec.describe Cart, type: :model do
     end
   end
 
+  context 'when associating' do
+    it { is_expected.to have_many(:cart_items).dependent(:destroy) }
+  end
+
   describe 'mark_as_abandoned' do
     let(:shopping_cart) { create(:shopping_cart) }
 

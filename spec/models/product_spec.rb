@@ -20,4 +20,8 @@ RSpec.describe Product, type: :model do
       expect(product.errors[:price]).to include("must be greater than or equal to 0")
     end
   end
+
+  context 'when associating' do
+    it { is_expected.to have_many(:cart_items).dependent(:destroy) }
+  end
 end
