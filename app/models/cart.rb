@@ -5,14 +5,10 @@ class Cart < ApplicationRecord
   has_many :products, through: :cart_items
 
   def mark_as_abandoned
-    update(last_interaction_at: Time.current)
-  end
-
-  def abandoned?
-    last_interaction_at > 3.hours.ago
-  end
+    update(abandoned: true) if last_interaction_at && last_interaction_at < 3.hours.ago
+  end  
 
   def remove_if_abandoned
-    destroy if last_interaction_at > 7.days.ago
+    destroy if abandoned? && last_interaction_at && last_interaction_at < 7.days.ago
   end
 end

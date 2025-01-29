@@ -8,7 +8,7 @@ module Carts
 
     def call
       add_products_to_cart
-      cart.touch
+      cart.touch(:last_interaction_at)
       
       success_response(cart)
     rescue ActiveRecord::RecordInvalid => e

@@ -23,7 +23,8 @@ module Carts
       @cart = find_cart_by_session || create_cart
       add_products_to_cart
       update_cart_total
-      cart.touch
+
+      cart.touch(:last_interaction_at)
     end
 
     def create_cart
