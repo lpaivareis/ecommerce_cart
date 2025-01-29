@@ -5,12 +5,27 @@ RSpec.describe "/carts", type: :request do
     let(:cart) { create(:shopping_cart) }
     let(:product) { create(:product, name: "Test Product", price: 10.0) }
 
-    let!(:cart_item) { CartItem.create(cart: cart, product: product, quantity: 1) }
+    let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
+
+    before do
+      session_double = { cart_id: cart.id }
+      def session_double.loaded?
+        true
+      end
+      
+      def session_double.enabled?
+        true
+      end
+      
+      allow_any_instance_of(ActionDispatch::Request)
+        .to receive(:session)
+        .and_return(session_double)
+    end
 
     context 'when the product already is in the cart' do
       subject do
-        post '/cart/add_items', params: { product_id: product.id, quantity: 1 }, as: :json
-        post '/cart/add_items', params: { product_id: product.id, quantity: 1 }, as: :json
+        post '/cart/add_item', params: { product_id: product.id, quantity: 1 }, as: :json
+        post '/cart/add_item', params: { product_id: product.id, quantity: 1 }, as: :json
       end
 
       it 'updates the quantity of the existing item in the cart' do
@@ -30,29 +45,40 @@ RSpec.describe "/carts", type: :request do
       let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
 
       before do
-        allow(Carts::CreatorService).to receive(:call).and_return(
-          OpenStruct.new(success?: true, data: cart)
-        )
+        session_double = { cart_id: cart.id }
+        def session_double.loaded?
+          true
+        end
+        
+        def session_double.enabled?
+          true
+        end
+        
+        allow_any_instance_of(ActionDispatch::Request)
+          .to receive(:session)
+          .and_return(session_double)
       end
 
       it 'returns success status' do
         make_request
         expect(response).to have_http_status(:success)
-      end
-
-      it 'calls service with correct params' do
-        make_request
-        expect(Carts::CreatorService).to have_received(:call)
       end
     end
 
     context 'when creating a new cart' do
-      let(:new_cart) { create(:shopping_cart) }
-
       before do
-        allow(Carts::CreatorService).to receive(:call).and_return(
-          OpenStruct.new(success?: true, data: new_cart)
-        )
+        session_double = { cart_id: nil }
+        def session_double.loaded?
+          true
+        end
+        
+        def session_double.enabled?
+          true
+        end
+        
+        allow_any_instance_of(ActionDispatch::Request)
+          .to receive(:session)
+          .and_return(session_double)
       end
 
       it 'returns success status' do
@@ -60,9 +86,8 @@ RSpec.describe "/carts", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it 'creates cart through service' do
-        make_request
-        expect(Carts::CreatorService).to have_received(:call)
+      it 'update quantity of cart' do
+        expect { make_request }.to change { Cart.count }.by(1)
       end
     end
 
@@ -82,6 +107,68 @@ RSpec.describe "/carts", type: :request do
         make_request
         expect(json_response['errors']).to eq(['Product must exist'])
       end
+    end
+  end
+
+  describe "GET /cart" do
+    let(:cart) { create(:shopping_cart) }
+    let(:product) { create(:product, name: "Test Product", price: 10.0) }
+
+    let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
+
+    before do
+      session_double = { cart_id: cart.id }
+      def session_double.loaded?
+        true
+      end
+      
+      def session_double.enabled?
+        true
+      end
+      
+      allow_any_instance_of(ActionDispatch::Request)
+        .to receive(:session)
+        .and_return(session_double)
+    end
+
+    subject(:make_request) { get '/cart', as: :json }
+
+    it 'returns success status' do
+      make_request
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "DELETE /cart/:product_id" do
+    let(:cart) { create(:shopping_cart) }
+    let(:product) { create(:product, name: "Test Product", price: 10.0) }
+
+    let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
+
+    before do
+      session_double = { cart_id: cart.id }
+      def session_double.loaded?
+        true
+      end
+      
+      def session_double.enabled?
+        true
+      end
+      
+      allow_any_instance_of(ActionDispatch::Request)
+        .to receive(:session)
+        .and_return(session_double)
+    end
+
+    subject(:make_request) { delete "/cart/#{product.id}", as: :json }
+
+    it 'returns success status' do
+      make_request
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'deletes item from cart' do
+      expect { make_request }.to change { cart.cart_items.count }.by(-1)
     end
   end
 
