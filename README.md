@@ -41,7 +41,7 @@ $ docker-compose run web bundle exec rubocop
 
 ## Executar RSpec  
 
-Para rodar os testes automatizados com RSpec, utilize o comando abaixo dentro do container:  
+Para rodar os testes automatizados com RSpec:  
 
 ```console
 $ docker-compose run test
@@ -73,5 +73,11 @@ Executar os testes:
 
 ```bash
 bundle exec rspec
+```
+
+Executar o rubocop:  
+
+```bash
+bundle exec rubocop
 ```
 
