@@ -107,7 +107,7 @@ RSpec.describe '/carts', type: :request do
 
       it 'returns error messages' do
         make_request
-        expect(json_response['errors']).to eq(['Product must exist'])
+        expect(response.parsed_body['errors']).to eq(['Product must exist'])
       end
     end
   end
@@ -172,11 +172,5 @@ RSpec.describe '/carts', type: :request do
     it 'deletes item from cart' do
       expect { make_request }.to change { cart.cart_items.count }.by(-1)
     end
-  end
-
-  private
-
-  def json_response
-    @json_response ||= JSON.parse(response.body)
   end
 end

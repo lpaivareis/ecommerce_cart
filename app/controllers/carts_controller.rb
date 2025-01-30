@@ -3,10 +3,12 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[show add_item destroy]
 
+  # GET /cart
   def show
     render json: @cart, serializer: CartSerializer
   end
 
+  # POST /cart
   def create
     result = Carts::CreatorService.call(cart_params, session[:cart_id])
 
@@ -18,6 +20,7 @@ class CartsController < ApplicationController
     end
   end
 
+  # POST /cart/add_item
   def add_item
     return render json: { error: 'Cart not found' }, status: :not_found unless @cart
 
@@ -30,6 +33,7 @@ class CartsController < ApplicationController
     end
   end
 
+  # DELETE /cart
   def destroy
     result = Carts::DestroyService.call(@cart, params[:product_id])
 
