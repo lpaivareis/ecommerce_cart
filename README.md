@@ -31,7 +31,7 @@ $ docker-compose build
 $ docker-compose up
 ```
 
-## Executar RuboCop  
+## Executar Rubocop  
 
 Para executar o RuboCop e garantir que o código segue as boas práticas de estilo Ruby, utilize o comando abaixo dentro do container:  
 
