@@ -1,7 +1,7 @@
 # Desafio Técnico - E-commerce  
 
 ## Detalhes  
-Este projeto é uma pequena simulação de um carrinho de compras, onde é possível executar algumas funções, como criar um carrinho, adicionar produtos, remover produtos e visualizar o carrinho.  
+Este projeto é uma API que simula um carrinho de compras para um e-commerce, permitindo criar um carrinho, adicionar produtos, visualizar os itens e remover produtos. Também, conta com um job automatizado utilizando Sidekiq e Sidekiq-Scheduler, que roda a cada hora para gerenciar carrinhos inativos. Se um carrinho não tiver nenhuma alteração por mais de 3 horas, ele é marcado como abandonado. Caso permaneça abandonado por mais de 7 dias, é excluído automaticamente. Dessa forma, a API mantém a organização do sistema e evita o acúmulo de dados desnecessários.
 
 ## Informações técnicas  
 
@@ -14,10 +14,17 @@ Este projeto é uma pequena simulação de um carrinho de compras, onde é poss�
 - Redis 7.0.15  
 
 ### Bibliotecas Utilizadas  
-- `active_model_serializer` (Facilita a serialização das respostas dos endpoints)  
-- `factory_bot_rails` (Facilita a criação de dados nos testes)  
-- `shoulda-matchers` (Biblioteca que facilita os testes de validações e relacionamentos)  
-- `byebug` (Ferramenta de depuração)  
+
+- **`active_model_serializers`**: Utilizada para estruturar e formatar as respostas da API de forma organizada. Com essa biblioteca, os dados retornados pelos endpoints são serializados de maneira padronizada, facilitando o consumo pelas aplicações clientes.  
+
+- **`factory_bot_rails`**: Facilita a criação de dados fictícios para testes automatizados. Com essa biblioteca, é possível definir *factories* para gerar instâncias de modelos de forma eficiente, tornando os testes mais simples e evitando a necessidade de criar registros manualmente.  
+
+- **`shoulda-matchers`**: Auxilia na escrita de testes unitários, fornecendo *matchers* que simplificam a verificação de validações e associações entre modelos do Rails. Com essa biblioteca, é possível testar regras como validações de presença, unicidade e relacionamentos de forma mais concisa.  
+
+- **`byebug`**: Ferramenta de depuração que permite pausar a execução do código e inspecionar variáveis durante a execução da aplicação. Muito útil para identificar e corrigir erros de forma interativa.  
+
+- **`rubocop`**: Ferramenta de análise estática de código que ajuda a manter um padrão de qualidade e estilo no código Ruby. Com o *Rubocop*, é possível identificar e corrigir automaticamente problemas de formatação, boas práticas e possíveis otimizações, garantindo um código mais limpo e sustentável.  
+
 
 ### Como executar o projeto  
 
