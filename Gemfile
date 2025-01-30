@@ -22,6 +22,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.4', '>= 6.4.4'
   gem 'shoulda-matchers', '~> 6.4'
   gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'rubocop', '~> 1.71'
 end
 
 group :development do
