@@ -26,9 +26,9 @@ Este projeto é uma API que simula um carrinho de compras para um e-commerce, pe
 - **`rubocop`**: Ferramenta de análise estática de código que ajuda a manter um padrão de qualidade e estilo no código Ruby. Com o *Rubocop*, é possível identificar e corrigir automaticamente problemas de formatação, boas práticas e possíveis otimizações, garantindo um código mais limpo e sustentável.  
 
 
-### Como executar o projeto  
+## Como executar o projeto  
 
-## Construindo e executando o container com Docker  
+### Construindo e executando o container com Docker  
 
 ```console
 $ docker-compose build
@@ -38,7 +38,7 @@ $ docker-compose build
 $ docker-compose up
 ```
 
-## Executar Rubocop  
+### Executar Rubocop  
 
 Para executar o RuboCop e garantir que o código segue as boas práticas de estilo Ruby, utilize o comando abaixo dentro do container:  
 
@@ -46,7 +46,7 @@ Para executar o RuboCop e garantir que o código segue as boas práticas de esti
 $ docker-compose run web bundle exec rubocop
 ```
 
-## Executar RSpec  
+### Executar RSpec  
 
 Para rodar os testes automatizados com RSpec:  
 
@@ -54,7 +54,7 @@ Para rodar os testes automatizados com RSpec:
 $ docker-compose run test
 ```
 
-## Executando a aplicação sem Docker  
+### Executando a aplicação sem Docker  
 
 Caso todas as ferramentas estejam instaladas e configuradas:  
 
