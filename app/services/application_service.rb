@@ -3,8 +3,8 @@
 require 'ostruct'
 
 class ApplicationService
-  def self.call(*args, &block)
-    new(*args, &block).call
+  def self.call(*, &)
+    new(*, &).call
   end
 
   private

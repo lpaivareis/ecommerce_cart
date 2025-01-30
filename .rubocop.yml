@@ -1,1 +1,6 @@
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
 inherit_from: .rubocop_todo.yml
