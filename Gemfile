@@ -26,6 +26,3 @@ group :development, :test do
   gem 'rubocop', '~> 1.71'
   gem 'shoulda-matchers', '~> 6.4'
 end
-
-group :development do
-end
