@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class DestroyService < ApplicationService
     def initialize(cart, product_id)
@@ -20,7 +22,7 @@ module Carts
     attr_reader :cart, :product_id
 
     def remove_product_from_cart
-      raise ActiveRecord::RecordNotFound, "Product Not Found" unless products.exists?
+      raise ActiveRecord::RecordNotFound, 'Product Not Found' unless products.exists?
 
       products.destroy_all
     end

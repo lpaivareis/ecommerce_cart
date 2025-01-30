@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartSerializer < ActiveModel::Serializer
   attributes :id, :products, :total_price
 

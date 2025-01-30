@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class AddItemService < ApplicationService
     def initialize(params, cart)
@@ -9,7 +11,7 @@ module Carts
     def call
       add_products_to_cart
       cart.touch(:last_interaction_at)
-      
+
       success_response(cart)
     rescue ActiveRecord::RecordInvalid => e
       error_response(e.record.errors.full_messages)

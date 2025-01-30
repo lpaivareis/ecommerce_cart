@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
@@ -5,7 +7,7 @@ RSpec.describe CartItem, type: :model do
     it 'validates numericality of quantity' do
       cart_item = described_class.new(quantity: -1)
       expect(cart_item.valid?).to be_falsey
-      expect(cart_item.errors[:quantity]).to include("must be greater than 0")
+      expect(cart_item.errors[:quantity]).to include('must be greater than 0')
     end
   end
 

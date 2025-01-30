@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class AbandonedService < ApplicationService
     def initialize(carts)
@@ -14,15 +16,11 @@ module Carts
     private
 
     def mark_abandoned_carts
-      Cart.find_each do |cart|
-        cart.mark_as_abandoned
-      end
+      Cart.find_each(&:mark_as_abandoned)
     end
 
     def remove_expired_carts
-      Cart.find_each do |cart|
-        cart.remove_if_abandoned
-      end
+      Cart.find_each(&:remove_if_abandoned)
     end
   end
 end

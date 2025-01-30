@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class CreatorService < ApplicationService
     def initialize(params, cart_id = nil)
@@ -37,12 +39,12 @@ module Carts
 
     def add_products_to_cart
       cart_item = cart.cart_items.find_or_initialize_by(product_id: product_id)
-      
+
       new_quantity = if cart_item.new_record?
-        quantity.to_i
-      else
-        cart_item.quantity + quantity.to_i
-      end
+                       quantity.to_i
+                     else
+                       cart_item.quantity + quantity.to_i
+                     end
 
       cart_item.update!(quantity: new_quantity)
     end
@@ -51,7 +53,7 @@ module Carts
       total = cart.cart_items.sum do |item|
         item.quantity * item.product.price
       end
-      
+
       cart.update!(total_price: total)
     end
   end

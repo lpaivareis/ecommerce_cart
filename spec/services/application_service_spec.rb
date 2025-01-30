@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ApplicationService do
@@ -33,7 +35,7 @@ RSpec.describe ApplicationService do
       let(:service_class) do
         Class.new(ApplicationService) do
           def call
-            error_response("Something went wrong")
+            error_response('Something went wrong')
           end
         end
       end
@@ -43,7 +45,7 @@ RSpec.describe ApplicationService do
       it 'returns an error response' do
         expect(subject).not_to be_success
         expect(subject.data).to be_nil
-        expect(subject.errors).to eq(["Something went wrong"])
+        expect(subject.errors).to eq(['Something went wrong'])
       end
     end
   end
@@ -52,10 +54,10 @@ RSpec.describe ApplicationService do
     let(:service_instance) { ApplicationService.new }
 
     it 'returns a successful OpenStruct object' do
-      result = service_instance.send(:success_response, { message: "Success" })
+      result = service_instance.send(:success_response, { message: 'Success' })
 
       expect(result).to be_success
-      expect(result.data).to eq({ message: "Success" })
+      expect(result.data).to eq({ message: 'Success' })
       expect(result.errors).to eq([])
     end
   end
@@ -64,19 +66,19 @@ RSpec.describe ApplicationService do
     let(:service_instance) { ApplicationService.new }
 
     it 'returns an error OpenStruct object' do
-      result = service_instance.send(:error_response, "Invalid request")
+      result = service_instance.send(:error_response, 'Invalid request')
 
       expect(result).not_to be_success
       expect(result.data).to be_nil
-      expect(result.errors).to eq(["Invalid request"])
+      expect(result.errors).to eq(['Invalid request'])
     end
 
     it 'handles multiple error messages' do
-      result = service_instance.send(:error_response, ["Error 1", "Error 2"])
+      result = service_instance.send(:error_response, ['Error 1', 'Error 2'])
 
       expect(result).not_to be_success
       expect(result.data).to be_nil
-      expect(result.errors).to eq(["Error 1", "Error 2"])
+      expect(result.errors).to eq(['Error 1', 'Error 2'])
     end
   end
 end

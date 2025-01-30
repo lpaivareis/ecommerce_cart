@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CartItemSerializer < ActiveModel::Serializer
   attributes :id, :name, :quantity, :unit_price, :total_price
-  
+
   def id
     object.product_id
   end

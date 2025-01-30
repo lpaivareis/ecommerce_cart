@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "/carts", type: :request do
-  describe "POST /add_items" do
+RSpec.describe '/carts', type: :request do
+  describe 'POST /add_items' do
     let(:cart) { create(:shopping_cart) }
-    let(:product) { create(:product, name: "Test Product", price: 10.0) }
+    let(:product) { create(:product, name: 'Test Product', price: 10.0) }
 
     let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
 
@@ -12,11 +14,11 @@ RSpec.describe "/carts", type: :request do
       def session_double.loaded?
         true
       end
-      
+
       def session_double.enabled?
         true
       end
-      
+
       allow_any_instance_of(ActionDispatch::Request)
         .to receive(:session)
         .and_return(session_double)
@@ -33,8 +35,8 @@ RSpec.describe "/carts", type: :request do
       end
     end
   end
-  
-  describe "POST /carts" do
+
+  describe 'POST /carts' do
     let(:product) { create(:product, price: 10.0) }
     let(:params) { { product_id: product.id, quantity: 2 } }
 
@@ -49,11 +51,11 @@ RSpec.describe "/carts", type: :request do
         def session_double.loaded?
           true
         end
-        
+
         def session_double.enabled?
           true
         end
-        
+
         allow_any_instance_of(ActionDispatch::Request)
           .to receive(:session)
           .and_return(session_double)
@@ -71,11 +73,11 @@ RSpec.describe "/carts", type: :request do
         def session_double.loaded?
           true
         end
-        
+
         def session_double.enabled?
           true
         end
-        
+
         allow_any_instance_of(ActionDispatch::Request)
           .to receive(:session)
           .and_return(session_double)
@@ -110,9 +112,9 @@ RSpec.describe "/carts", type: :request do
     end
   end
 
-  describe "GET /cart" do
+  describe 'GET /cart' do
     let(:cart) { create(:shopping_cart) }
-    let(:product) { create(:product, name: "Test Product", price: 10.0) }
+    let(:product) { create(:product, name: 'Test Product', price: 10.0) }
 
     let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
 
@@ -121,11 +123,11 @@ RSpec.describe "/carts", type: :request do
       def session_double.loaded?
         true
       end
-      
+
       def session_double.enabled?
         true
       end
-      
+
       allow_any_instance_of(ActionDispatch::Request)
         .to receive(:session)
         .and_return(session_double)
@@ -139,9 +141,9 @@ RSpec.describe "/carts", type: :request do
     end
   end
 
-  describe "DELETE /cart/:product_id" do
+  describe 'DELETE /cart/:product_id' do
     let(:cart) { create(:shopping_cart) }
-    let(:product) { create(:product, name: "Test Product", price: 10.0) }
+    let(:product) { create(:product, name: 'Test Product', price: 10.0) }
 
     let!(:cart_item) { create(:cart_item, cart: cart, product: product, quantity: 1) }
 
@@ -150,11 +152,11 @@ RSpec.describe "/carts", type: :request do
       def session_double.loaded?
         true
       end
-      
+
       def session_double.enabled?
         true
       end
-      
+
       allow_any_instance_of(ActionDispatch::Request)
         .to receive(:session)
         .and_return(session_double)

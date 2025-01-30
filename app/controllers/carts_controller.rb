@@ -19,10 +19,10 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    return render json: { error: "Cart not found" }, status: :not_found unless @cart
-  
+    return render json: { error: 'Cart not found' }, status: :not_found unless @cart
+
     result = Carts::AddItemService.call(params, @cart)
-  
+
     if result.success?
       render json: result.data, serializer: CartSerializer
     else
