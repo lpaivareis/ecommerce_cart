@@ -1,0 +1,33 @@
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/carts/abandoned_service.rb'
+    - 'app/services/carts/add_item_service.rb'
+    - 'app/services/carts/creator_service.rb'
+    - 'app/services/carts/destroy_service.rb'
+    - 'spec/services/application_service_spec.rb'
+
+Metrics/BlockLength:
+  Max: 138
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+Metrics/MethodLength:
+  Max: 12
+
+Metrics/PerceivedComplexity:
+  Max: 9
+
+Naming/VariableNumber:
+  Exclude:
+    - 'spec/services/carts/abandoned_service_spec.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'bin/bundle'
+
+Layout/LineLength:
+  Max: 198
